@@ -1,0 +1,1 @@
+java -jar target/flashcard-app-1.0-SNAPSHOT.jar --order random --repetitions 3 flashcards.txt

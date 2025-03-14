@@ -1,0 +1,12 @@
+com\mycompany\app\organizer\WorstFirstSorter.class
+com\mycompany\app\service\FlashcardSession.class
+com\mycompany\app\model\Card.class
+com\mycompany\app\FlashcardApp.class
+com\mycompany\app\achievement\AchievementTracker.class
+com\mycompany\app\service\CardLoader.class
+com\mycompany\app\App.class
+com\mycompany\app\organizer\CardOrganizer.class
+com\mycompany\app\organizer\RandomSorter.class
+com\mycompany\app\cli\CommandLineOptions.class
+com\mycompany\app\cli\HelpFormatter.class
+com\mycompany\app\organizer\RecentMistakesFirstSorter.class

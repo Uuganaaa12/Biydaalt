@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommandLineOptions.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">flashcard-system</a> &gt; <a href="index.source.html" class="el_package">com.mycompany.app.cli</a> &gt; <span class="el_source">CommandLineOptions.java</span></div><h1>CommandLineOptions.java</h1><pre class="source lang-java linenums">package com.mycompany.app.cli;
+import java.util.Arrays;
+
+public class CommandLineOptions {
+<span class="fc" id="L5">    private boolean help = false;</span>
+<span class="fc" id="L6">    private String order = &quot;random&quot;;</span>
+<span class="fc" id="L7">    private int repetitions = 1;</span>
+<span class="fc" id="L8">    private boolean invertCards = false;</span>
+<span class="fc" id="L9">    private String cardsFile = null;</span>
+<span class="fc" id="L10">    public CommandLineOptions(String[] args) {</span>
+<span class="fc" id="L11">        parseOptions(args);</span>
+<span class="fc" id="L12">    }</span>
+
+    private void parseOptions(String[] args) {
+<span class="fc bfc" id="L15" title="All 2 branches covered.">        for (int i = 0; i &lt; args.length; i++) {</span>
+<span class="fc bfc" id="L16" title="All 5 branches covered.">            switch (args[i]) {</span>
+                case &quot;--help&quot;:
+<span class="fc" id="L18">                    help = true;</span>
+<span class="fc" id="L19">                    break;</span>
+                case &quot;--order&quot;:
+<span class="pc bpc" id="L21" title="1 of 2 branches missed.">                    if (i + 1 &lt; args.length) {</span>
+<span class="fc" id="L22">                        String orderType = args[++i];</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">                        if (Arrays.asList(&quot;random&quot;, &quot;worst-first&quot;, &quot;recent-mistakes-first&quot;).contains(orderType)) {</span>
+<span class="fc" id="L24">                            order = orderType;</span>
+                        } else {
+<span class="fc" id="L26">                            System.err.println(&quot;Invalid order type: &quot; + orderType);</span>
+<span class="fc" id="L27">                            help = true;</span>
+                        }
+<span class="fc" id="L29">                    }</span>
+                    break;
+                case &quot;--repetitions&quot;:
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">                    if (i + 1 &lt; args.length) {</span>
+                        try {
+<span class="fc" id="L34">                            int repetitions = Integer.parseInt(args[++i]);</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">                            if (repetitions &gt; 0) {</span>
+<span class="fc" id="L36">                                this.repetitions = repetitions;</span>
+                            } else {
+<span class="fc" id="L38">                                System.err.println(&quot;Dawtalt ni eyreg too baih ystoi&quot;);</span>
+<span class="fc" id="L39">                                help = true;</span>
+                            }
+<span class="fc" id="L41">                        } catch (NumberFormatException e) {</span>
+<span class="fc" id="L42">                            System.err.println(&quot;aldaatai dawtaltiin utga: &quot; + args[i]);</span>
+<span class="fc" id="L43">                            help = true;</span>
+<span class="fc" id="L44">                        }</span>
+                    }
+                    break;
+                case &quot;--invertCards&quot;:
+<span class="fc" id="L48">                    invertCards = true;</span>
+<span class="fc" id="L49">                    break;</span>
+                default:
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">                    if (!args[i].startsWith(&quot;--&quot;)) {</span>
+<span class="fc" id="L52">                        cardsFile = args[i];</span>
+                    } else {
+<span class="nc" id="L54">                        System.err.println(&quot;iim songolt baihgui baina: &quot; + args[i]);</span>
+<span class="nc" id="L55">                        help = true;</span>
+                    }
+            }
+        }
+<span class="fc" id="L59">    }</span>
+
+    public boolean isHelp() {
+<span class="fc" id="L62">        return help;</span>
+    }
+
+    public String getOrder() {
+<span class="fc" id="L66">        return order;</span>
+    }
+
+    public int getRepetitions() {
+<span class="fc" id="L70">        return repetitions;</span>
+    }
+
+    public boolean isInvertCards() {
+<span class="fc" id="L74">        return invertCards;</span>
+    }
+    
+
+    public String getCardsFile() {
+<span class="fc" id="L79">        return cardsFile;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
