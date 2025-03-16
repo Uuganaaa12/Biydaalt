@@ -30,13 +30,13 @@ jobs:
       run: mvn -B surefire-report:report
       
     - name: Archive test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: test-report
         path: target/site/surefire-report.html
         
     - name: Archive compiled JAR
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: flashcard-app
         path: target/*.jar
