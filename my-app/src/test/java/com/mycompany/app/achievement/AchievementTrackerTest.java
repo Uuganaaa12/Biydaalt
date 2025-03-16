@@ -1,28 +1,36 @@
 package com.mycompany.app.achievement;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AchievementTrackerTest {
-    
+
     private AchievementTracker tracker;
-    private ByteArrayOutputStream outContent;
-    private PrintStream originalOut;
-    
-    @Before
-    public void setup() {
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+
+    @BeforeEach
+    public void setUp() {
         tracker = new AchievementTracker();
-        
-        // Capture System.out for testing output
-        originalOut = System.out;
-        outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
     }
-    
+
+    @Test
+    public void testInitialState() {
+        assertEquals(0, tracker.getAverageResponseTime());
+    }
+
+    @Test
+    public void testTrackResponseTime() {
+        tracker.trackResponseTime(2.5);
+        tracker.trackResponseTime(3.5);
+        assertEquals(3.0, tracker.getAverageResponseTime());
+    }
+
     @Test
     public void testUnlockAchievement() {
         tracker.unlockAchievement("FAST");
@@ -30,65 +38,52 @@ public class AchievementTrackerTest {
         
         String output = outContent.toString();
         assertTrue(output.contains("FAST"));
-        assertFalse(output.contains("CORRECT"));
-        
-        // Reset output for next test
-        outContent.reset();
-        
-        // Unlock another achievement
+        assertFalse(output.contains("Odoogoor ymar ch amjilt gargaagui baina"));
+    }
+
+    @Test
+    public void testMultipleAchievements() {
+        tracker.unlockAchievement("FAST");
         tracker.unlockAchievement("CORRECT");
         tracker.displayAchievements();
         
-        output = outContent.toString();
+        String output = outContent.toString();
         assertTrue(output.contains("FAST"));
         assertTrue(output.contains("CORRECT"));
     }
-    
+
     @Test
-    public void testTrackResponseTime() {
-        // No times tracked yet
-        assertEquals(0, tracker.getAverageResponseTime(), 0.001);
-        
-        // Add some response times
-        tracker.trackResponseTime(2.5);
-        tracker.trackResponseTime(3.5);
-        
-        // Check average
-        assertEquals(3.0, tracker.getAverageResponseTime(), 0.001);
-        
-        // Add another time
-        tracker.trackResponseTime(6.0);
-        
-        // Check updated average
-        assertEquals(4.0, tracker.getAverageResponseTime(), 0.001);
-    }
-    
-    @Test
-    public void testDisplayAchievementsEmpty() {
+    public void testNoAchievements() {
         tracker.displayAchievements();
         
         String output = outContent.toString();
         assertTrue(output.contains("Odoogoor ymar ch amjilt gargaagui baina"));
     }
-    
+
     @Test
-    public void testDisplayAllAchievements() {
+    public void testDuplicateAchievements() {
         tracker.unlockAchievement("FAST");
-        tracker.unlockAchievement("CORRECT");
-        tracker.unlockAchievement("REPEAT");
-        tracker.unlockAchievement("CONFIDENT");
+        tracker.unlockAchievement("FAST");  // Duplicate
         
+        outContent.reset();
         tracker.displayAchievements();
         
+        // Count occurrences of "FAST" in the output
         String output = outContent.toString();
-        assertTrue(output.contains("FAST"));
-        assertTrue(output.contains("CORRECT"));
-        assertTrue(output.contains("REPEAT"));
-        assertTrue(output.contains("CONFIDENT"));
+        int count = output.split("FAST").length - 1;
+        assertEquals(1, count);  // Should appear exactly once
     }
-    
+
     @Test
-    public void tearDown() {
-        System.setOut(originalOut);
+    public void testAverageResponseTimeWithNoData() {
+        assertEquals(0, tracker.getAverageResponseTime());
+    }
+
+    @Test
+    public void testAverageResponseTimeRounding() {
+        tracker.trackResponseTime(1.23);
+        tracker.trackResponseTime(4.56);
+        // Average should be 2.895
+        assertEquals(2.895, tracker.getAverageResponseTime(), 0.001);
     }
 }
