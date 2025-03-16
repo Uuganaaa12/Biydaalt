@@ -7,7 +7,6 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,6 +24,7 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
 
+
     - name: Cache Maven dependencies
       uses: actions/cache@v2
       with:
@@ -40,10 +40,7 @@ jobs:
     - name: Run tests with Maven
       run: mvn test
       working-directory: my-app
-      
-    # Add explicit artifact upload step
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: maven-build-artifacts
-        path: my-app/target
+
+
+
+
