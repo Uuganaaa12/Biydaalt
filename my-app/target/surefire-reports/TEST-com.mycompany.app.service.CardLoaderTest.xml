@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.mycompany.app.service.CardLoaderTest" time="0.036" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.mycompany.app.service.CardLoaderTest" time="0.037" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="22"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-22\bin"/>
-    <property name="sun.java.command" value="C:\Users\Acer\AppData\Local\Temp\surefire10874523460112871160\surefirebooter-20250316193956694_3.jar C:\Users\Acer\AppData\Local\Temp\surefire10874523460112871160 2025-03-16T19-39-56_486-jvmRun1 surefire-20250316193956694_1tmp surefire_0-20250316193956694_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Acer\AppData\Local\Temp\surefire3732570109830040101\surefirebooter-20250316194216382_3.jar C:\Users\Acer\AppData\Local\Temp\surefire3732570109830040101 2025-03-16T19-42-16_157-jvmRun1 surefire-20250316194216382_1tmp surefire_0-20250316194216382_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\TestFlashCard\my-app\target\test-classes;C:\TestFlashCard\my-app\target\classes;C:\Users\Acer\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.2\junit-jupiter-api-5.9.2.jar;C:\Users\Acer\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Acer\.m2\repository\org\junit\platform\junit-platform-commons\1.9.2\junit-platform-commons-1.9.2.jar;C:\Users\Acer\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Acer\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.2\junit-jupiter-engine-5.9.2.jar;C:\Users\Acer\.m2\repository\org\junit\platform\junit-platform-engine\1.9.2\junit-platform-engine-1.9.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Acer\AppData\Local\Temp\surefire10874523460112871160\surefirebooter-20250316193956694_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Acer\AppData\Local\Temp\surefire3732570109830040101\surefirebooter-20250316194216382_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="22.0.2+9-70"/>
@@ -58,9 +58,9 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="66.0"/>
   </properties>
-  <testcase name="testLoadCardsFromNonexistentFile" classname="com.mycompany.app.service.CardLoaderTest" time="0.009"/>
-  <testcase name="testLoadCardsFromEmptyFile" classname="com.mycompany.app.service.CardLoaderTest" time="0.005"/>
+  <testcase name="testLoadCardsFromNonexistentFile" classname="com.mycompany.app.service.CardLoaderTest" time="0.008"/>
+  <testcase name="testLoadCardsFromEmptyFile" classname="com.mycompany.app.service.CardLoaderTest" time="0.007"/>
   <testcase name="testLoadCardsFromValidFile" classname="com.mycompany.app.service.CardLoaderTest" time="0.004"/>
-  <testcase name="testLoadCardsFromFileWithOddLineCount" classname="com.mycompany.app.service.CardLoaderTest" time="0.007"/>
+  <testcase name="testLoadCardsFromFileWithOddLineCount" classname="com.mycompany.app.service.CardLoaderTest" time="0.006"/>
   <testcase name="testLoadCardsWithSpecialCharacters" classname="com.mycompany.app.service.CardLoaderTest" time="0.004"/>
 </testsuite>
