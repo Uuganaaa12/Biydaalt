@@ -77,7 +77,8 @@ public class FlashcardIntegrationTest {
         assertEquals("Test Question", card.getAnswer(), "Inverted card should swap question and answer");
         
       
-        assertFalse(card.checkAnswer("Test Question"), "Should accept correct answer");
+        assertTrue(card.checkAnswer("Test Question"), "Should accept correct answer");
+        //assertFalse(card.checkAnswer("Test Question"), "Should accept correct answer");
         assertFalse(card.checkAnswer("Wrong Answer"), "Should reject incorrect answer");
     }
     
