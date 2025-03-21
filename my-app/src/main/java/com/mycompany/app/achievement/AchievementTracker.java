@@ -8,8 +8,7 @@ import java.util.Set;
 public class AchievementTracker {
     private Set<String> unlockedAchievements = new HashSet<>();
     private List<Double> responseTimes = new ArrayList<>();
-    
-//add comment
+
     public void unlockAchievement(String achievement) {
         unlockedAchievements.add(achievement);
     }

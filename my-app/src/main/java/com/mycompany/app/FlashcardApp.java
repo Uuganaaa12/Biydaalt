@@ -1,15 +1,15 @@
 package com.mycompany.app;
 
-import com.mycompany.app.cli.HelpFormatter;
-import com.mycompany.app.model.Card;
-import com.mycompany.app.service.CardLoader;
-import com.mycompany.app.service.FlashcardSession;
-import com.mycompany.app.achievement.AchievementTracker;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+
+import com.mycompany.app.achievement.AchievementTracker;
+import com.mycompany.app.cli.HelpFormatter;
+import com.mycompany.app.model.Card;
+import com.mycompany.app.service.CardLoader;
+import com.mycompany.app.service.FlashcardSession;
 
 public class FlashcardApp {
     private static Scanner scanner = new Scanner(System.in);
@@ -24,7 +24,6 @@ public class FlashcardApp {
         
         String cardsFile = getCardsFile(args);
         if (cardsFile == null) {
-            System.err.println("Error: No valid card file specified.");
             scanner.close();
             return;
         }
@@ -32,20 +31,17 @@ public class FlashcardApp {
         try {
             List<Card> cards = CardLoader.loadCardsFromFile(cardsFile);
             if (cards.isEmpty()) {
-                System.err.println("Error: The file doesn't contain any valid flashcards.");
+                System.err.println("Error: file dotor card baihgui baina.");
                 scanner.close();
                 return;
             }
             
             AchievementTracker tracker = new AchievementTracker();
-            
-            // Create session without options - prompting will happen inside
             FlashcardSession session = new FlashcardSession(cards, tracker);
             session.start();
             
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
-            System.err.println("Please ensure the file exists and is accessible.");
         } finally {
             scanner.close();
         }
@@ -53,8 +49,6 @@ public class FlashcardApp {
     
     private static String getCardsFile(String[] args) {
         String fileName = null;
-        
-        // Check if file path was provided in args
         for (String arg : args) {
             if (!arg.startsWith("-")) {
                 File file = new File(arg);
@@ -63,15 +57,12 @@ public class FlashcardApp {
                 }
             }
         }
-        
-        // If no valid file in args, prompt the user
-        System.out.println("Please enter the path to the flashcard file:");
+
         fileName = scanner.nextLine().trim();
-        
-        // Validate the file exists
+
         File file = new File(fileName);
         if (!file.exists() || !file.isFile()) {
-            System.err.println("Error: The specified file does not exist or is not accessible.");
+            System.err.println("Error: Zaasan file baihgui esvel handah bolomjgui baina.");
             return null;
         }
         

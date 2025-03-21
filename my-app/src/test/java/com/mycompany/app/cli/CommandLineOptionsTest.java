@@ -1,7 +1,10 @@
 package com.mycompany.app.cli;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class CommandLineOptionsTest {
 
@@ -31,7 +34,6 @@ public class CommandLineOptionsTest {
         // Test invalid order
         options = new CommandLineOptions(
                 new String[] {"--order", "invalid-order", "file.txt"});
-        // Should fall back to default or raise error
         assertTrue(options.isHelp() || "random".equals(options.getOrder()));
     }
 
@@ -40,16 +42,13 @@ public class CommandLineOptionsTest {
         CommandLineOptions options = new CommandLineOptions(
                 new String[] {"--repetitions", "3", "file.txt"});
         assertEquals(3, options.getRepetitions());
-        
-        // Test invalid repetitions
+
         options = new CommandLineOptions(
                 new String[] {"--repetitions", "-1", "file.txt"});
-        // Should fall back to default or raise error
         assertTrue(options.isHelp() || options.getRepetitions() == 1);
         
         options = new CommandLineOptions(
                 new String[] {"--repetitions", "not-a-number", "file.txt"});
-        // Should fall back to default or raise error
         assertTrue(options.isHelp() || options.getRepetitions() == 1);
     }
 

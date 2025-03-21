@@ -1,17 +1,20 @@
 package com.mycompany.app.service;
 
-import com.mycompany.app.model.Card;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.io.TempDir;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import com.mycompany.app.model.Card;
 
 public class CardLoaderTest {
 
@@ -27,7 +30,6 @@ public class CardLoaderTest {
     
     @Test
     public void testLoadCardsFromValidFile() throws IOException {
-        // Create test file with questions and answers
         List<String> lines = Arrays.asList(
             "Question 1",
             "Answer 1",
@@ -51,19 +53,19 @@ public class CardLoaderTest {
     
     @Test
     public void testLoadCardsFromFileWithOddLineCount() throws IOException {
-        // Create test file with odd number of lines
+ 
         List<String> lines = Arrays.asList(
             "Question 1",
             "Answer 1",
             "Question 2",
             "Answer 2",
-            "Question 3"  // No answer for this question
+            "Question 3"  
         );
         Files.write(testFile.toPath(), lines);
         
         List<Card> cards = CardLoader.loadCardsFromFile(testFile.getAbsolutePath());
         
-        // Should load only complete pairs
+     
         assertEquals(2, cards.size());
         assertEquals("Question 1", cards.get(0).getQuestion());
         assertEquals("Answer 1", cards.get(0).getAnswer());
@@ -73,7 +75,7 @@ public class CardLoaderTest {
     
     @Test
     public void testLoadCardsFromEmptyFile() throws IOException {
-        // Create empty test file
+      
         Files.write(testFile.toPath(), Arrays.asList());
         
         List<Card> cards = CardLoader.loadCardsFromFile(testFile.getAbsolutePath());
@@ -94,7 +96,7 @@ public class CardLoaderTest {
     
     @Test
     public void testLoadCardsWithSpecialCharacters() throws IOException {
-        // Create test file with special characters
+    
         List<String> lines = Arrays.asList(
             "Үсэг?",
             "Letter",

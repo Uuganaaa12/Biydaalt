@@ -1,17 +1,19 @@
 package com.mycompany.app.achievement;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AchievementTrackerTest {
 
     private AchievementTracker tracker;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
+
 
     @BeforeEach
     public void setUp() {
@@ -63,15 +65,13 @@ public class AchievementTrackerTest {
     @Test
     public void testDuplicateAchievements() {
         tracker.unlockAchievement("FAST");
-        tracker.unlockAchievement("FAST");  // Duplicate
+        tracker.unlockAchievement("FAST"); 
         
         outContent.reset();
         tracker.displayAchievements();
-        
-        // Count occurrences of "FAST" in the output
         String output = outContent.toString();
         int count = output.split("FAST").length - 1;
-        assertEquals(1, count);  // Should appear exactly once
+        assertEquals(1, count);  
     }
 
     @Test
@@ -83,7 +83,6 @@ public class AchievementTrackerTest {
     public void testAverageResponseTimeRounding() {
         tracker.trackResponseTime(1.23);
         tracker.trackResponseTime(4.56);
-        // Average should be 2.895
         assertEquals(2.895, tracker.getAverageResponseTime(), 0.001);
     }
 }

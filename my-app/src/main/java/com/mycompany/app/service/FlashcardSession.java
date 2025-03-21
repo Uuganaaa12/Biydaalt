@@ -1,17 +1,17 @@
 package com.mycompany.app.service;
 
-import com.mycompany.app.model.Card;
-import com.mycompany.app.organizer.CardOrganizer;
-import com.mycompany.app.organizer.RandomSorter;
-import com.mycompany.app.organizer.RecentMistakesFirstSorter;
-import com.mycompany.app.organizer.WorstFirstSorter;
-import com.mycompany.app.achievement.AchievementTracker;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import com.mycompany.app.achievement.AchievementTracker;
+import com.mycompany.app.model.Card;
+import com.mycompany.app.organizer.CardOrganizer;
+import com.mycompany.app.organizer.RandomSorter;
+import com.mycompany.app.organizer.RecentMistakesFirstSorter;
+import com.mycompany.app.organizer.WorstFirstSorter;
 
 public class FlashcardSession {
     private final List<Card> cards;
@@ -40,8 +40,7 @@ public class FlashcardSession {
 
     public void start() {
         printWelcomeMessage();
-        
-        // Configure options at startup
+
         configureSession();
         
         while (isRunning) {
@@ -50,7 +49,6 @@ public class FlashcardSession {
             
             if (isRunning) {
                 if (promptForRestart()) {
-                    // Allow reconfiguration of options
                     if (promptForReconfiguration()) {
                         configureSession();
                     }
@@ -61,7 +59,7 @@ public class FlashcardSession {
         }
         
         tracker.displayAchievements();
-        System.out.println("\nThank you for using the Flashcard App. Goodbye!");
+        System.out.println("\nFlashcard programmiig ashiglasand bayarlalaa. Bayartai!");
     }
 
     private void printWelcomeMessage() {
@@ -72,16 +70,12 @@ public class FlashcardSession {
     }
     
     private void configureSession() {
-        // Configure repetitions
         requiredRepetitions = promptForRepetitions();
-        
-        // Configure order
+
         organizer = promptForOrderType();
-        
-        // Configure card inversion
+
         boolean newInvertSetting = promptForInvertCards();
         if (newInvertSetting != invertCards) {
-            // Only invert if the setting changed
             cards.forEach(Card::invert);
             invertCards = newInvertSetting;
         }
@@ -95,20 +89,20 @@ public class FlashcardSession {
     }
     
     private boolean promptForRestart() {
-        System.out.println("\nWould you like to restart with the same cards? (yes/no)");
+        System.out.println("\nSaynii kartuudaa dahin ajillah uu? (yes/no)");
         String restart = scanner.nextLine().trim().toLowerCase();
         return restart.equals("yes") || restart.equals("y");
     }
     
     private boolean promptForReconfiguration() {
-        System.out.println("Would you like to reconfigure the session options? (yes/no)");
+        System.out.println("Songoltuudiig dahin tohiruulah uu (repetitions, order, inversion)? (yes/no)");
         String reconfigure = scanner.nextLine().trim().toLowerCase();
         return reconfigure.equals("yes") || reconfigure.equals("y");
     }
     
     private int promptForRepetitions() {
         while (true) {
-            System.out.println("\nHow many correct answers are required for each card? (1-10):");
+            System.out.println("\nKart burt heden udaa zuw hariulah shaardlagatai ve? (1-10):");
             String input = scanner.nextLine().trim();
             
             try {
@@ -116,10 +110,10 @@ public class FlashcardSession {
                 if (repetitions >= 1 && repetitions <= 10) {
                     return repetitions;
                 } else {
-                    System.out.println("Please enter a number between 1 and 10.");
+                    System.out.println("1ees 10 iin hoorond too songon uu.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid number.");
+                System.out.println("Zuw too oruula uu!");
             }
         }
     }
@@ -127,13 +121,13 @@ public class FlashcardSession {
     private CardOrganizer promptForOrderType() {
         List<String> validOptions = Arrays.asList("random", "worst-first", "recent-mistakes-first");
         
-        System.out.println("\nPlease select the order of flashcards:");
-        System.out.println("1. random - Cards appear in random order");
-        System.out.println("2. worst-first - Cards with most mistakes appear first");
-        System.out.println("3. recent-mistakes-first - Cards with recent mistakes appear first");
+        System.out.println("\nKartuudiin garch ireh daraalliig songono uu:");
+        System.out.println("1. random - Kartuud sanamsargui daraallaar garch irne");
+        System.out.println("2. worst-first - Hamgiin ih aldsan kartuud ehleed garch irne");
+        System.out.println("3. recent-mistakes-first - Suuld aldsan kartuud ehleed garch irne");
         
         while (true) {
-            System.out.print("Enter your choice (1-3): ");
+            System.out.print("Songoltoo oruulna uu (1-3): ");
             String input = scanner.nextLine().trim();
             
             try {
@@ -143,19 +137,18 @@ public class FlashcardSession {
                     return createOrganizer(orderType);
                 }
             } catch (NumberFormatException e) {
-                // Check if they entered the option name directly
                 if (validOptions.contains(input.toLowerCase())) {
                     return createOrganizer(input.toLowerCase());
                 }
             }
             
-            System.out.println("Invalid choice. Please enter a number between 1 and 3.");
+            System.out.println("1ees 3iin hoorond too songono uu");
         }
     }
     
     private boolean promptForInvertCards() {
         while (true) {
-            System.out.println("\nWould you like to invert cards (swap questions and answers)? (y/n):");
+            System.out.println("\nKartuudiin asuult hariultiin bairiig solih uu? (y/n):");
             String response = scanner.nextLine().trim().toLowerCase();
             
             if (response.equals("y") || response.equals("yes")) {
@@ -163,7 +156,7 @@ public class FlashcardSession {
             } else if (response.equals("n") || response.equals("no")) {
                 return false;
             } else {
-                System.out.println("Invalid input. Please enter 'y' or 'n'.");
+             System.out.println(" n(no) eswel y(yes) gesen solgolt hiih bolomjtoi");
             }
         }
     }
@@ -226,7 +219,7 @@ public class FlashcardSession {
                 long roundEndTime = System.currentTimeMillis();
                 double avgResponseTime = (roundEndTime - roundStartTime) / 1000.0 / roundAnswers;
                 
-                System.out.println("\nAverage response time for this round: " + 
+                System.out.println("\nEne uyiin asuultuudad hariulsan dundaj hugatsaa : " + 
                         String.format("%.2f", avgResponseTime) + " seconds");
                 
                 if (avgResponseTime < 5.0) {
@@ -241,12 +234,11 @@ public class FlashcardSession {
             tracker.unlockAchievement("CORRECT");
         }
         
-        System.out.println("\nCongratulations! You've completed all flashcards.");
+        System.out.println("\nBayrhurgey! Buh kartuudiig amjilttai duusgalaa");
     }
     
     private boolean processCard(Card card) {
         long startTime = System.currentTimeMillis();
-        
         System.out.println("\nQuestion: " + card.getQuestion());
         System.out.print("Your answer (type 'skip' to skip, 'exit' to quit): ");
         String answer = scanner.nextLine().trim();
